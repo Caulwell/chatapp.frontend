@@ -1,10 +1,15 @@
+import { useState } from "react";
+
+interface lobbyProps{
+    joinRoom: (user: string, room: string) => void;
+}
+
+const Lobby = ({joinRoom} : lobbyProps) => {
 
 
-const Lobby = () => {
 
-
-
-
+    const [user, setUser] = useState("");
+    const [room, setRoom] = useState("");
 
 
 
@@ -23,7 +28,10 @@ const Lobby = () => {
                     </p>
                   </div>
 
-                  <form className="mt-8 space-y-6" action="#" method="POST">
+                  <form className="mt-8 space-y-6" onSubmit={e => {
+                      e.preventDefault();
+                      joinRoom(user, room);
+                  }}>
                     <input type="hidden" name="remember" defaultValue="true" />
                     <div className="rounded-md shadow-sm -space-y-px">
                       <div>
@@ -31,6 +39,8 @@ const Lobby = () => {
                           name
                         </label>
                         <input
+                          value={user}
+                          onChange={e => setUser(e.target.value)}  
                           id="name"
                           name="username"
                           type="text"
@@ -44,6 +54,8 @@ const Lobby = () => {
                           Room Name
                         </label>
                         <input
+                          value={room}
+                          onChange={e => setRoom(e.target.value)}    
                           id="room"
                           name="room"
                           type="text"
