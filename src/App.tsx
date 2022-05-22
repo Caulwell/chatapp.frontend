@@ -2,17 +2,15 @@ import './App.css';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import Lobby from './components/Lobby';
 import { useState } from 'react';
+import {IMessage} from "./interfaces/IMessage";
+import Chat from './components/Chat';
 
 
-interface Message {
-  user: string,
-  message: string
-}
 
 function App() {
 
   const [connection, setConnection] = useState<HubConnection | null>(null);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<IMessage[]>([]);
   
   const joinRoom = async (user: string, room: string) => {
 
@@ -23,7 +21,7 @@ function App() {
         .build();
 
       connection.on("ReceiveMessage", (user, message)  => {
-        let m: Message = {user, message}
+        let m: IMessage = {user, message}
         setMessages(messages => [...messages, m]);
       });
 
@@ -37,10 +35,25 @@ function App() {
 
   };
 
+  const sendMessage = async (message:string) => {
+    try {
+      if(connection)
+      await connection.invoke("SendMessage", message);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+
 
   return (
    <div className="App">
-     <Lobby joinRoom={joinRoom}/>
+     {!connection ?
+      <Lobby joinRoom={joinRoom}/>
+      :
+      <Chat messages={messages} sendMessage={sendMessage}/>
+    }
+     
    </div>
   );
 }

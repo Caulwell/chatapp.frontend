@@ -1,12 +1,10 @@
 import { useState } from "react";
 
-interface lobbyProps{
+interface LobbyProps{
     joinRoom: (user: string, room: string) => void;
 }
 
-const Lobby = ({joinRoom} : lobbyProps) => {
-
-
+const Lobby = ({joinRoom} : LobbyProps) => {
 
     const [user, setUser] = useState("");
     const [room, setRoom] = useState("");
