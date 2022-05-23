@@ -11,8 +11,11 @@ function App() {
 
   const [connection, setConnection] = useState<HubConnection | null>(null);
   const [messages, setMessages] = useState<IMessage[]>([]);
+  const [user, setUser] = useState<string | null>(null);
   
   const joinRoom = async (user: string, room: string) => {
+
+    setUser(user);
 
     try {
       const connection = new HubConnectionBuilder()
@@ -28,6 +31,7 @@ function App() {
       connection.onclose(e => {
         setConnection(null);
         setMessages([]);
+        setUser(null);
       });
 
       await connection.start();
@@ -65,7 +69,7 @@ function App() {
      {!connection ?
       <Lobby joinRoom={joinRoom}/>
       :
-      <Chat messages={messages} sendMessage={sendMessage} closeConnection={closeConnection}/>
+      <Chat messages={messages} sendMessage={sendMessage} closeConnection={closeConnection} user={user}/>
     }
      
    </div>

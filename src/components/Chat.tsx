@@ -7,9 +7,10 @@ interface ChatProps{
     messages: IMessage[]
     sendMessage: (message:string) => void
     closeConnection: () => void
+    user: string | null
 }
 
-const Chat = ({messages, sendMessage, closeConnection} : ChatProps) => {
+const Chat = ({messages, sendMessage, closeConnection, user} : ChatProps) => {
 
     const [message, setMessage] = useState<string>("");
 
@@ -17,7 +18,7 @@ const Chat = ({messages, sendMessage, closeConnection} : ChatProps) => {
         // SCREEN
         <div className="container flex flex-col min-h-screen pb-3 min-w-full">
             <Nav closeConnection={closeConnection}/>
-           <MessageContainer messages={messages}/>
+           <MessageContainer messages={messages} user={user}/>
 
             {/* Form footer */}
             <form 
