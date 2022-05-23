@@ -15,7 +15,7 @@ const Nav = ({closeConnection} : NavProps) => {
                       alt="Workflow"
                     />
                 </div>
-                <button onClick={() => closeConnection()} className="p-1 px-4 text-white bg-indigo-700 rounded-full hover:bg-indigo-700">Leave Room</button>
+                <button onClick={() => closeConnection()} className="p-1 px-3 text-white bg-indigo-700 rounded hover:bg-indigo-700">Leave Room</button>
             </div>
         </div>
     )

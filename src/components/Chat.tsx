@@ -21,7 +21,7 @@ const Chat = ({messages, sendMessage, closeConnection} : ChatProps) => {
 
             {/* Form footer */}
             <form 
-            className="flex px-6 min-w-full "
+            className="flex px-4 min-w-full space-x-4"
             onSubmit={e => {
                 e.preventDefault();
                 sendMessage(message);
@@ -32,11 +32,11 @@ const Chat = ({messages, sendMessage, closeConnection} : ChatProps) => {
                 value={message}
                 onChange={e => setMessage(e.target.value)}
                 type="text" 
-                className="" 
+                className="rounded flex-1 border-0 shadow-slate-300 shadow-sm"
                 placeholder="Type a message..." 
                 />
                 <button 
-                className=""
+                className="p-1 px-5 text-white bg-indigo-700 rounded hover:bg-indigo-700"
                 >
                     Send
                 </button>
