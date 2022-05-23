@@ -6,16 +6,17 @@ import Nav from "./Nav";
 interface ChatProps{
     messages: IMessage[]
     sendMessage: (message:string) => void
+    closeConnection: () => void
 }
 
-const Chat = ({messages, sendMessage} : ChatProps) => {
+const Chat = ({messages, sendMessage, closeConnection} : ChatProps) => {
 
     const [message, setMessage] = useState<string>("");
 
     return (
         // SCREEN
         <div className="container flex flex-col min-h-screen pb-3 min-w-full">
-            <Nav/>
+            <Nav closeConnection={closeConnection}/>
            <MessageContainer messages={messages}/>
 
             {/* Form footer */}

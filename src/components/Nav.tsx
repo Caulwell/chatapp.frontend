@@ -1,7 +1,9 @@
 
+interface NavProps{
+    closeConnection: () => void
+}
 
-
-const Nav = () => {
+const Nav = ({closeConnection} : NavProps) => {
 
     return (
         <div className="container mx-auto p-3 px-6 bg-white min-w-full">
@@ -13,7 +15,7 @@ const Nav = () => {
                       alt="Workflow"
                     />
                 </div>
-                <button className="p-1 px-4 text-white bg-indigo-700 rounded-full hover:bg-indigo-700">Leave Room</button>
+                <button onClick={() => closeConnection()} className="p-1 px-4 text-white bg-indigo-700 rounded-full hover:bg-indigo-700">Leave Room</button>
             </div>
         </div>
     )
